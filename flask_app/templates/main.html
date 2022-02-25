@@ -1,0 +1,79 @@
+{%with messages = get_flashed_messages()%}
+    {%if messages %}
+        <script type="text/javascript">
+            alert("{{messages[-1]}}");
+        </script>
+    {%endif%}
+{%endwith%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mask Removal</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+      
+    
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Mask Removal</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>    
+    <br><br/>
+    <br><br/>
+    <div style="text-align: center;">
+        <font size="5em"> <h1> Face Mask Removal </h1>
+        </font>
+        <br>
+        <p class="lead text-muted">Face Mask Removal는 마스크를 착용하고 있는 인물의 사진에서 마스크를 제거하여 마스크 뒤에 숨겨져 있는 얼굴을 복원하는 기능을 수행합니다.<br> 
+            옳바른 예측을 수행하기 위해서는 몇가지 주의사항이 있습니다.<br><br>
+            1. 파일 업로드 과정에서 이미지 파일만을 선택해 주세요. 지원하는 포맷) JPEG, JPG, PNG <br>
+            2. 이미지 파일의 이름은 영어, 숫자 형식만 지원합니다.<br>
+            3. 고해상도의 이미지는 가급적 삼가해 주세요.<br>
+            4. 이미지 대부분이 사람의 얼굴인 이미지를 사용해 주세요.<br>
+            <br>
+           옳바른 이미지 입력 예시 >> <img src="{{ url_for('static', filename="default/example.jpeg") }}"  border="2" width="170" height="170" >
+        </p>
+    </div>
+    <br><br/>
+    <br><br/>
+    <div style="text-align: center;">
+        <p>
+            <form action="https://mask-removal.herokuapp.com/view"   
+                method="POST" 
+                enctype = "multipart/form-data">
+                <input type = "file" name = "file" style="height: 200;width: 260;"/> &nbsp; &nbsp; &nbsp;
+                <input type = "submit" value="마스크 제거" style="height: 40px;width: 105px;"> 
+        </form>
+        </p>
+    </div>    
+</body>
+</html>
