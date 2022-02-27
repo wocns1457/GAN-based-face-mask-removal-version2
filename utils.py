@@ -11,7 +11,7 @@ np.random.seed(42)
 
 def noise_processing(generate_image):
     """
-    Mask Generator를 통해 나온 Binary 이미지에 원본 이미지를 합성하여 Noise 생성
+    Mask Generator를 통해 나온 Binary 이미지에 Noise 제거
     Args:
       generate_image : model를 통해 생성된 이미지
     Return:
@@ -29,11 +29,14 @@ def noise_processing(generate_image):
     generate_image = tf.reshape(generate_image, [batch, height, width , 1])
     return generate_image
 
-def training_visualization(model, test_input, tar, epoch, step):
+def mask_training_visualization(model, test_input, tar, epoch, step):
     """
-    training visualization
+    mask model training visualization
     Args:
-        model : Generate model
+        model : Mask Generate model
+        test_input : input image
+        tar : ground truth image
+        epoch, step : training epoch, step
     """
     
     save_dir = './mask32_training'
@@ -59,9 +62,13 @@ def training_visualization(model, test_input, tar, epoch, step):
 
 def face_training_visualization(model, test_input, binary_input, tar, epoch, step):
     """
-    training visualization
+    fece model training visualization
     Args:
-        model : Generate model
+        model : Mask Generate model
+        test_input : input image
+        binary_input : Mask Generate model out
+        tar : ground truth image
+        epoch, step : training epoch, step
     """
     
     save_dir = './face32_training'
@@ -83,21 +90,3 @@ def face_training_visualization(model, test_input, binary_input, tar, epoch, ste
     
     figure.canvas.draw()
     figure.canvas.flush_events()
-    
-    
-def generate_images(model, test_input, tar):
-    """
-    Generate된 이미지 시각화
-    Args:
-        model : Generate model
-    """
-    prediction = model(test_input, training=False)
-    display_list = [test_input[0], tar[0], prediction[0]]
-    title = ['Input Image', 'Ground Truth', 'Predicted Image']
-    
-    for i in range(3):
-        plt.subplot(1, 3, i+1)
-        plt.title(title[i])
-        plt.imshow(display_list[i] * 0.5 + 0.5)
-        plt.axis('off')
-    plt.show()
