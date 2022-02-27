@@ -62,7 +62,7 @@ class Train_Mask:
                     pbar.set_postfix(loss=loss)    
                 # training_visualization once per 500 step
                 if step % 1000 == 0:
-                    training_visualization(self.model, mask_input, binary_input, epoch, step, task='mask')     
+                    mask_training_visualization(self.model, mask_input, binary_input, epoch, step, task='mask')     
             # Save (checkpoint) the model once per 2 epcoh
             if (epoch + 1) % 2 == 0:
                 self.save(self.checkpoint_dir)
@@ -241,44 +241,5 @@ class Train_Face:
             if (epoch + 1) % 1 == 0:
                 self.save(self.face_checkpoint_dir, self.dis_checkpoint_dir)
               
-
-
-##################################################################
-# config = tf.compat.v1.ConfigProto(gpu_options = tf.compat.v1.GPUOptions(per_process_gpu_memory_fraction=0.95)
-# #device_count = {'GPU': 1}
-# )
-# config.gpu_options.allow_growth = True
-# session = tf.compat.v1.Session(config=config)
-# tf.compat.v1.keras.backend.set_session(session)
-###################################################################
-# gpu = tf.config.experimental.list_physical_devices('GPU') # 내 컴에 장착된 GPU를 list로 반환
-# try:
-#     tf.config.experimental.set_memory_growth(gpu[0], True) # GPU Memory Growth를 Enable
-# except RuntimeError as e:
-#     print(e) # Error 발생하면 Error 내용 출력
-###################################################################
-# PATH = os.getcwd()
-# train_path = PATH+'/train'                
-# mask_checkpoint_dir = PATH+'/mask32_checkpoints'
-# face_checkpoint_dir = PATH+'/face32_checkpoints'
-
-# BATCH_SIZE = 4
-# trainset = Dataset(file_path=train_path, batch_size=BATCH_SIZE, task='mask')
-# trainset = trainset.make_train()
-# with tf.device('/gpu:0'):
-                ######  mask train ############
-    # mask_G = Mask_G(filters=32)
-    # mask_G_train = Train_Mask(mask_G, checkpoint_dir=mask_checkpoint_dir)
-    # # mask_G_train.load(checkpoint_dir=mask_checkpoint_dir)
-    # mask_G_train.fit(trainset, epochs=4)
-
-
-                #########  Face train ############
-    # mask_G, face_G, face_D = Mask_G(filters=32), Face_G(filters=32), Face_D(filters=32)
-    # face_train = Train_Face(mask_G, face_G, face_D, 
-    #                 mask_checkpoint_dir=mask_checkpoint_dir, face_checkpoint_dir=face_checkpoint_dir)
-    # face_train.fit(trainset, epochs=4)
-    # face_train.load(face_checkpoint_dir)
-    # print(face_train.face_model.get_weights(),'\n')
 
 
