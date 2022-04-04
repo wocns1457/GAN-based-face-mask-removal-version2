@@ -4,8 +4,9 @@ GAN-based-face-mask-removal-version1에서의 문제점인 일반화 성능이 �
 U-Net구조를 기반으로 하여 마스크 객체의 값을 1로 나머지 부분을 0으로 [Segmentation](https://arxiv.org/abs/1505.04597)하여 Binary map을 도출하고,
 마스크를 쓴 인물의 사진과, Binary map을 [GAN](https://arxiv.org/abs/1406.2661)구조를 사용해 마스크 영역을 제거하여 제거된 부분을 실제 얼굴로 복원합니다.
 그리고 Heroku를 통해 모델을 배포하여 Web을 통해 모델을 테스트를 진행해 볼 수 있습니다.  
-http://mask-removal.herokuapp.com/
 
+http://mask-removal.herokuapp.com/  
+[발표 영상 링크](https://drive.google.com/file/d/1cW06QysHOYnOB2aCgz3t5ItglEWY8FOz/view?usp=sharing)
 
 ## Environment
 - python==3.8
