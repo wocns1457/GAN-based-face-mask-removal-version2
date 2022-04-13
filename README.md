@@ -67,15 +67,25 @@ flask run
  ```
  
  ## Result
+ - Performance evaluation  
+ CelebA 데이터중 10,000장의 이미지를 Test data로 사용하였고, 실제 이미지와 생성된 이미지 간의 특징 거리 측정에 가장 널리 사용되는  
+ 평가 지표인 FID(Frechet Inception Distance)를 사용하였습니다.  
+ 
+    >***Version1 FID score : 22.863***  
+    >***Version2 FID score : 28.206***
+    
+<br>
 
 - Version1, 2 결과 비교
 <p align="center">
 <img src = "https://github.com/wocns1457/GAN-based-face-mask-removal-version2/blob/main/sample_img/result2.JPG" width="45%" height="50%">
 </p>  
-이번 프로젝트에서는 마스크가 비교적 잘 제거되고 해당 부분에 얼굴이 생성된 것을 볼 수 있습니다.
+version2의 score가 version1보다 높게 나왔지만, 이는 Test data의 한정으로 나온 것이기 때문에 version1의 모델이 version2의 모델보다 일반화 성능이 좋다고 판단할 수 없습니다.
+하지만 이번 프로젝트에서는 새로운 데이터에 대해서 마스크가 비교적 잘 제거되고 해당 부분에 얼굴이 생성된 것을 볼 수 있습니다.
 
 ## Reference
 - NIZAM UD DIN, KAMRAN JAVED , SEHO BAE, AND JUNEHO YI "A Novel GAN-Based Network for Unmasking of Masked Face"  
   (pull paper : https://ieeexplore.ieee.org/document/9019697)
  - Data Preprocessing : https://github.com/aqeelanwar/MaskTheFace
 - Instance Normalization code : https://github.com/bigbreadguy/Batch_Instance_Normalization-Tensorflow2.0
+- FID score for PyTorch : https://github.com/mseitzer/pytorch-fid
