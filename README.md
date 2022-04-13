@@ -68,8 +68,7 @@ flask run
  
  ## Result
  - Performance evaluation  
- CelebA 데이터중 10,000장의 이미지를 Test data로 사용하였고, 실제 이미지와 생성된 이미지 간의 특징 거리 측정에 가장 널리 사용되는  
- 평가 지표인 FID(Frechet Inception Distance)를 사용하였습니다.  
+ CelebA 데이터중 10,000장의 이미지를 Test data로 사용하였고, 실제 이미지와 생성된 이미지 간의 특징 거리 측정에 가장 널리 사용되는 평가 지표인 FID(Frechet Inception Distance)를 사용하였습니다.  
  
     >***Version1 FID score : 22.863***  
     >***Version2 FID score : 28.206***
