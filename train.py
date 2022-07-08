@@ -46,8 +46,11 @@ class Train_Mask:
             os.mkdir(checkpoint_dir)
         self.checkpoint.save(file_prefix= self.checkpoint_prefix)
 
-    def load(self, checkpoint_dir):
-        self.checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
+    def load(self, checkpoint_dir, ckpt_num=None):
+        if ckpt_num is None:
+            self.checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
+        else:
+            self.checkpoint.restore(checkpoint_dir+'/ckpt-{ckpt_num}'.format(ckpt_num=ckpt_num))
         
     def fit(self, dataset, epochs):     
         for epoch in range(epochs):
@@ -62,7 +65,7 @@ class Train_Mask:
                     pbar.set_postfix(loss=loss)    
                 # training_visualization once per 500 step
                 if step % 1000 == 0:
-                    mask_training_visualization(self.model, mask_input, binary_input, epoch, step, task='mask')     
+                    mask_training_visualization(self.model, mask_input, binary_input, epoch, step)     
             # Save (checkpoint) the model once per 2 epcoh
             if (epoch + 1) % 2 == 0:
                 self.save(self.checkpoint_dir)
@@ -211,9 +214,15 @@ class Train_Face:
         self.face_checkpoint.save(file_prefix= self.face_checkpoint_prefix)
         self.dis_checkpoint.save(file_prefix= self.dis_checkpoint_prefix)
 
-    def load(self, face_checkpoint_dir, dis_checkpoint_dir):
-        self.face_checkpoint.restore(tf.train.latest_checkpoint(face_checkpoint_dir))
-        self.dis_checkpoint.restore(tf.train.latest_checkpoint(dis_checkpoint_dir))
+    def load(self, face_checkpoint_dir, dis_checkpoint_dir, f_ckpt_num=None, d_ckpt_num=None):
+        if f_ckpt_num is None:
+            self.face_checkpoint.restore(tf.train.latest_checkpoint(face_checkpoint_dir))
+        else:
+            self.face_checkpoint.restore(face_checkpoint_dir+'/ckpt-{f_ckpt_num}'.format(f_ckpt_num=f_ckpt_num))
+        if d_ckpt_num is None:    
+            self.dis_checkpoint.restore(tf.train.latest_checkpoint(dis_checkpoint_dir))
+        else:
+            self.dis_checkpoint.restore(dis_checkpoint_dir+'/ckpt-{d_ckpt_num}'.format(d_ckpt_num=d_ckpt_num))
 
     def fit(self, dataset, epochs):     
         ratio = int(round(epochs * 0.4))
