@@ -56,7 +56,7 @@ Face D - whole 은 생성된 이미지 전체를 바라보면서 가짜 이미�
 - Face G Training, Face D whole, region Training
  ```
  python main.py --mode face-train  # If a checkpoint exists, training proceeds from the latest checkpoint.
- python main.py --mode face-train --choice_ckpt --f_ckpt_num 'num' --m_ckpt_num 'num'  # If you want to train at a specific checkpoint.
+ python main.py --mode face-train --choice_ckpt --f_ckpt_num 'num' --d_ckpt_num 'num'  # If you want to train at a specific checkpoint.
  ```
 - Test
  ```
